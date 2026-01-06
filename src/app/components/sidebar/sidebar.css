@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+aside {
+  width: 200px;
+  height: 100%;
+  border-right: 1px solid #ccc;
+}
+li {
+  list-style: none;
+}
