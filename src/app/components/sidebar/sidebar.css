@@ -1,7 +1,9 @@
 :host {
   display: block;
 }
-
+h1 {
+  text-align: center;
+}
 aside {
   width: 200px;
   height: 100%;
@@ -9,4 +11,8 @@ aside {
 }
 li {
   list-style: none;
+  color: #ccc;
+}
+.active {
+  color: black;
 }
