@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ListItem } from '../components/list-item/list-item';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-list',
@@ -7,4 +8,6 @@ import { ListItem } from '../components/list-item/list-item';
   templateUrl: './list.html',
   styleUrl: './list.css',
 })
-export class List {}
+export class List {
+  protected taskService = inject(TaskService);
+}

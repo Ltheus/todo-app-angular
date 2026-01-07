@@ -1,5 +1,6 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { TaskForm } from '../task-form/task-form';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-header',
@@ -8,14 +9,16 @@ import { TaskForm } from '../task-form/task-form';
   styleUrl: './header.css',
 })
 export class Header {
-  protected isModalOpen = signal(false);
+  private taskService = inject(TaskService);
+
+  protected isModalOpen = this.taskService.isModalOpen;
 
   openModal() {
-    this.isModalOpen.set(true);
+    this.taskService.startAdding();
   }
 
   closeModal() {
-    this.isModalOpen.set(false);
+    this.taskService.closeModal();
   }
 
   @HostListener('document:keydown.escape')

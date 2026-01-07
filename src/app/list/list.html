@@ -1,8 +1,7 @@
 <div class="list-container">
     <ul>
-        <app-list-item title="Consertar o banheiro" description="Consertar o banheiro de visitas"></app-list-item>
-        <app-list-item title="Fazer café" description="Preparar café para as visitas"></app-list-item>
-        <app-list-item title="Arrumar o quarto" description="Arrumar o quarto para as visitas"></app-list-item>
-        <app-list-item title="Fazer compras" description="Fazer compras para as visitas"></app-list-item>
+        @for (task of taskService.tasks(); track task.id) {
+        <app-list-item [task]="task"></app-list-item>
+        }
     </ul>
 </div>

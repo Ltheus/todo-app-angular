@@ -1,10 +1,10 @@
-<li class="list-item">
+<div class="list-item">
     <div class="list-item-content">
-        <h2>{{ title }}</h2>
-        <p>{{ description }}</p>
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.description }}</p>
     </div>
     <div class="list-item-actions">
-        <button class="btn-edit">Editar</button>
-        <button class="btn-delete">Deletar</button>
+        <button class="btn-edit" (click)="onEdit()">Editar</button>
+        <button class="btn-delete" (click)="onDelete()">Excluir</button>
     </div>
-</li>
+</div>

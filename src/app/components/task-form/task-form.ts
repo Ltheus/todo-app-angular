@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-form',
@@ -9,34 +10,45 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './task-form.css',
 })
 export class TaskForm {
-  @Output() close = new EventEmitter<void>();
+  private taskService = inject(TaskService);
 
-  // 1. Criamos o FormGroup que representa o formulário como um todo
   taskForm = new FormGroup({
-    // 2. Definimos um FormControl para o campo 'title'
-    // O primeiro argumento '' é o valor inicial (vazio)
-    // O segundo argumento é um array de validadores (obrigatório, mín 3 letras)
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', [Validators.maxLength(100)]),
   });
 
-  // Método chamado quando o formulário é enviado
-  onSubmit() {
-    // Verifica se todos os validadores passaram
-    if (this.taskForm.valid) {
-      console.log('Nova tarefa:', this.taskForm.value.title);
+  constructor() {
+    // Reage a mudanças na tarefa em edição
+    effect(() => {
+      const taskToEdit = this.taskService.editingTask();
+      if (taskToEdit) {
+        this.taskForm.patchValue({
+          title: taskToEdit.title,
+          description: taskToEdit.description,
+        });
+      } else {
+        this.taskForm.reset();
+      }
+    });
+  }
 
-      // Limpa o formulário após o envio
-      this.taskForm.reset();
-      this.close.emit();
+  onSubmit() {
+    if (this.taskForm.valid) {
+      const title = this.taskForm.value.title!;
+      const description = this.taskForm.value.description || '';
+      const editingTask = this.taskService.editingTask();
+
+      if (editingTask) {
+        this.taskService.updateTask(editingTask.id, title, description);
+      } else {
+        this.taskService.addTask(title, description);
+      }
     } else {
-      // Se inválido, marca todos os campos como "tocados" para mostrar os erros no UI
       this.taskForm.markAllAsTouched();
     }
   }
 
   onCancel() {
-    this.taskForm.reset();
-    this.close.emit();
+    this.taskService.closeModal();
   }
 }

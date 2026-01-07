@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { Task, TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-list-item',
@@ -8,6 +9,15 @@ import { Component, Input } from '@angular/core';
   styleUrl: './list-item.css',
 })
 export class ListItem {
-  @Input() title: string = 'Titulo';
-  @Input() description: string = 'Descrição';
+  @Input({ required: true }) task!: Task;
+
+  private taskService = inject(TaskService);
+
+  onEdit() {
+    this.taskService.startEditing(this.task);
+  }
+
+  onDelete() {
+    this.taskService.deleteTask(this.task.id);
+  }
 }
