@@ -1,0 +1,38 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
+    <h2>Nova Tarefa</h2>
+
+    <div class="form-group">
+        <label for="title">O que precisa ser feito?</label>
+        <!-- vinculamos o input ao FormControl 'title' com formControlName -->
+        <input id="title" type="text" formControlName="title" placeholder="Ex: Comprar café">
+
+        <!-- Mostra erro se for inválido E (foi tocado OU o form foi submetido) -->
+        @if (taskForm.get('title')?.invalid && (taskForm.get('title')?.touched || taskForm.get('title')?.dirty)) {
+        <div class="error-message">
+            @if (taskForm.get('title')?.errors?.['required']) {
+            <span>O título é obrigatório.</span>
+            }
+            @if (taskForm.get('title')?.errors?.['minlength']) {
+            <span>O título deve ter no mínimo 3 caracteres.</span>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="form-group">
+        <label for="description">Descrição</label>
+        <input id="description" formControlName="description" placeholder="Detalhes adicionais (opcional)">
+        @if (taskForm.get('description')?.invalid && taskForm.get('description')?.touched) {
+        <div class="error-message">
+            @if (taskForm.get('description')?.errors?.['maxlength']) {
+            <span>A descrição deve ter no máximo 100 caracteres.</span>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="onCancel()">Cancelar</button>
+        <button type="submit" [disabled]="taskForm.invalid">Adicionar Tarefa</button>
+    </div>
+</form>
