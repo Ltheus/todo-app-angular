@@ -37,6 +37,7 @@
   --input-border: #d1d5db;
   --input-text: #1a1a1a;
   --label-color: #374151;
+  --overlay: rgba(20, 21, 23, 0.5);
 
   --btn-cancel-bg: #f3f4f6;
   --btn-cancel-text: #4b5563;
@@ -44,45 +45,46 @@
 }
 
 html[data-theme='dark'] {
-  --bg-color: #0f172a;
-  --bg-surface: #1e293b;
-  --card-bg: rgba(30, 41, 59, 0.7);
+  --bg-color: rgb(20, 21, 23);
+  --bg-surface: rgb(32, 33, 36); /* Slightly lighter neutral gray */
+  --card-bg: rgba(32, 33, 36, 0.8);
 
   --text-color: #e2e8f0;
   --text-secondary: #94a3b8;
 
-  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.08);
 
   --sidebar-bg: var(--bg-surface);
   --sidebar-border: var(--border-color);
   --nav-item-color: #94a3b8;
-  --nav-item-hover-bg: #334155;
+  --nav-item-hover-bg: rgba(255, 255, 255, 0.05);
   --nav-item-hover-color: #f8fafc;
-  --nav-item-active-bg: rgba(37, 99, 235, 0.2);
-  --nav-item-active-color: #60a5fa;
+  --nav-item-active-bg: rgba(255, 255, 255, 0.1);
+  --nav-item-active-color: #ffffff;
 
-  /* Buttons */
+  /* Buttons - Desaturated/Neutralized slightly or kept purely functional */
   --btn-primary-bg: #4f46e5;
   --btn-primary-text: #ffffff;
   --btn-primary-hover: #4338ca;
 
-  --btn-edit-bg: rgba(79, 70, 229, 0.2);
-  --btn-edit-text: #818cf8;
-  --btn-edit-hover: rgba(79, 70, 229, 0.3);
+  --btn-edit-bg: rgba(255, 255, 255, 0.05);
+  --btn-edit-text: #e2e8f0;
+  --btn-edit-hover: rgba(255, 255, 255, 0.1);
 
   --btn-delete-bg: rgba(225, 29, 72, 0.2);
   --btn-delete-text: #fb7185;
   --btn-delete-hover: rgba(225, 29, 72, 0.3);
 
   /* Forms & Modals */
-  --input-bg: #0f172a;
-  --input-border: #475569;
+  --input-bg: rgb(28, 29, 31);
+  --input-border: rgb(55, 56, 58);
   --input-text: #e2e8f0;
   --label-color: #cbd5e1;
+  --overlay: rgba(94, 92, 128, 0.155);
 
-  --btn-cancel-bg: #334155;
-  --btn-cancel-text: #cbd5e1;
-  --btn-cancel-hover: #475569;
+  --btn-cancel-bg: rgb(45, 46, 48);
+  --btn-cancel-text: #e2e8f0;
+  --btn-cancel-hover: rgb(60, 61, 63);
 }
 
 * {
