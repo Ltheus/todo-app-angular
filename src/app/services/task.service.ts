@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface Task {
   id: string;
@@ -12,20 +13,7 @@ export interface Task {
 })
 export class TaskService {
   // Estado das Tarefas
-  tasks = signal<Task[]>([
-    {
-      id: '1',
-      title: 'Aprender Angular',
-      description: 'Estudar Signals e Standalone Components',
-      completed: false,
-    },
-    {
-      id: '2',
-      title: 'Criar To-Do App',
-      description: 'Aplicar conhecimentos num projeto real',
-      completed: false,
-    },
-  ]);
+  tasks = signal<Task[]>([]);
 
   // Estado do Modal
   isModalOpen = signal(false);
@@ -33,7 +21,40 @@ export class TaskService {
   // Estado da Edição (se null, é uma nova tarefa)
   editingTask = signal<Task | null>(null);
 
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadFromLocalStorage();
+
+      // Salva automaticamente sempre que 'tasks' mudar
+      effect(() => {
+        const currentTasks = this.tasks();
+        localStorage.setItem('tasks', JSON.stringify(currentTasks));
+      });
+    }
+  }
+
+  private loadFromLocalStorage() {
+    const saved = localStorage.getItem('tasks');
+    if (saved) {
+      this.tasks.set(JSON.parse(saved));
+    } else {
+      // Dados iniciais de exemplo apenas se não houver nada salvo
+      this.tasks.set([
+        {
+          id: '1',
+          title: 'Aprender Angular',
+          description: 'Estudar Signals e Standalone Components',
+          completed: false,
+        },
+        {
+          id: '2',
+          title: 'Criar To-Do App',
+          description: 'Aplicar conhecimentos num projeto real',
+          completed: false,
+        },
+      ]);
+    }
+  }
 
   // Ações do Modal
   openModal() {
