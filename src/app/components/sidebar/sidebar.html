@@ -1,10 +1,15 @@
 <aside>
-    <h1>To-Do</h1>
+    <h1>
+        To-Do
+        <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+            <lucide-icon [img]="isDarkMode() ? Sun : Moon" size="20"></lucide-icon>
+        </button>
+    </h1>
     <nav>
         <ul>
-            <li class="active"><a routerLink="/">Todas</a></li>
-            <li><a routerLink="/pending">Pendentes</a></li>
-            <li><a routerLink="/completed">Concluídas</a></li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Todas</a></li>
+            <li routerLinkActive="active"><a routerLink="/pending">Pendentes</a></li>
+            <li routerLinkActive="active"><a routerLink="/completed">Concluídas</a></li>
         </ul>
     </nav>
 </aside>

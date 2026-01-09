@@ -10,7 +10,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: #f8fafc; /* Subtle light background to make glassmorphism pop */
+  background-color: var(--bg-color); /* Subtle light background to make glassmorphism pop */
+  transition: background-color 0.3s ease;
 }
 
 main {
