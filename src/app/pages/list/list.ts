@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { ListItem } from '../components/list-item/list-item';
-import { TaskService } from '../services/task.service';
+import { ListItem } from '../../components/list-item/list-item';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-list',
