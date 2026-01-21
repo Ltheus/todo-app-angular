@@ -11,6 +11,11 @@ nav {
   align-items: center;
 }
 
+.icon {
+  display: flex;
+  align-items: center;
+}
+
 .btn-new-task {
   background-color: var(--btn-primary-bg);
   color: var(--btn-primary-text);
@@ -20,6 +25,9 @@ nav {
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-new-task:hover {

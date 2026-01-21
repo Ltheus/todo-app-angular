@@ -1,12 +1,13 @@
 <header>
     <nav>
-        <h1>Todas</h1>
-        <button class="btn-new-task" (click)="openModal()">+ Nova Tarefa</button>
+        <h1>{{ title() }}</h1>
+        <button class="btn-new-task" (click)="openModal()">
+            <lucide-icon class="icon" [img]="maisinho" size="18"></lucide-icon> Nova Tarefa
+        </button>
     </nav>
 
     @if (isModalOpen()) {
     <div class="modal-overlay" (click)="closeModal()">
-        <!-- stopPropagation impede que clicar no form feche o modal -->
         <div class="modal-content" (click)="$event.stopPropagation()">
             <app-task-form></app-task-form>
         </div>

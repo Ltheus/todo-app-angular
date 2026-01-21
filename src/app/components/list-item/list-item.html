@@ -4,7 +4,11 @@
         <p>{{ task.description }}</p>
     </div>
     <div class="list-item-actions">
-        <button class="btn-edit" (click)="onEdit()">Editar</button>
-        <button class="btn-delete" (click)="onDelete()">Excluir</button>
+        <button class="btn-edit" (click)="onEdit()">
+            <lucide-icon [img]="lapisinho" size="18"></lucide-icon> Editar
+        </button>
+        <button class="btn-delete" (click)="onDelete()">
+            <lucide-icon [img]="lixeirinha" size="18"></lucide-icon> Excluir
+        </button>
     </div>
 </div>

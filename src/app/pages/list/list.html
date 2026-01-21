@@ -1,7 +1,9 @@
 <div class="list-container">
     <ul>
-        @for (task of taskService.tasks(); track task.id) {
+        @for (task of filteredTasks(); track task.id) {
         <app-list-item [task]="task"></app-list-item>
+        } @empty {
+        <p class="empty-state">Nenhuma tarefa encontrada.</p>
         }
     </ul>
 </div>

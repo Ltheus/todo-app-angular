@@ -11,18 +11,53 @@ aside {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: width 0.3s ease, padding 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+aside.collapsed {
+  width: 80px;
+  padding: 24px 8px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 40px; /* Ensure consistent height when h1 is hidden */
 }
 
 h1 {
   font-size: 1.5rem;
   font-weight: 800;
   color: var(--text-color);
-  padding: 0 8px;
+  margin: 0;
+  padding-left: 8px;
   letter-spacing: -0.5px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--nav-item-color);
+  padding: 8px;
+  border-radius: 8px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-left: auto; /* Push to right if alone */
+}
+
+.icon-btn:hover {
+  background-color: var(--nav-item-hover-bg);
+  color: var(--text-color);
+}
+
+aside.collapsed .icon-btn {
+  margin: 0 auto;
 }
 
 nav ul {
@@ -40,7 +75,9 @@ li {
 }
 
 li a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 12px 16px;
   text-decoration: none;
   color: var(--nav-item-color);
@@ -50,9 +87,19 @@ li a {
   transition: all 0.2s ease;
 }
 
+aside.collapsed li a {
+  justify-content: center;
+  padding: 12px;
+  gap: 0;
+}
+
 li:hover {
   background-color: var(--nav-item-hover-bg);
   transform: translateX(4px);
+}
+
+aside.collapsed li:hover {
+  transform: none;
 }
 
 li:hover a {
@@ -63,20 +110,33 @@ li:hover a {
   background-color: var(--nav-item-active-bg);
 }
 
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+}
+
 .theme-toggle {
   background: none;
   border: none;
   cursor: pointer;
   color: var(--nav-item-color);
-  padding: 8px;
-  border-radius: 50%;
+  padding: 12px 16px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
+  width: 100%;
   transition: all 0.2s ease;
 }
 
 .theme-toggle:hover {
   background-color: var(--nav-item-hover-bg);
   color: var(--text-color);
+}
+
+aside.collapsed .theme-toggle {
+  justify-content: center;
+  padding: 12px;
+  width: auto;
 }

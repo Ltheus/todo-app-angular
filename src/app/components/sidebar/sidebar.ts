@@ -1,7 +1,16 @@
 import { Component, Inject, PLATFORM_ID, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { LucideAngularModule, Moon, Sun } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  Moon,
+  Sun,
+  ChevronsLeft,
+  ChevronsRight,
+  List,
+  Clock,
+  CheckCircle,
+} from 'lucide-angular';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,10 +20,16 @@ import { LucideAngularModule, Moon, Sun } from 'lucide-angular';
   styleUrl: './sidebar.css',
 })
 export class Sidebar {
-  readonly Moon = Moon;
-  readonly Sun = Sun;
+  readonly luazinha = Moon;
+  readonly solzinho = Sun;
+  readonly esquerdinha = ChevronsLeft;
+  readonly direitinha = ChevronsRight;
+  readonly listinha = List;
+  readonly reloginho = Clock;
+  readonly checkinho = CheckCircle;
 
   isDarkMode = signal(false);
+  isCollapsed = signal(false);
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
@@ -35,6 +50,10 @@ export class Sidebar {
 
   toggleTheme() {
     this.setDarkMode(!this.isDarkMode());
+  }
+
+  toggleSidebar() {
+    this.isCollapsed.set(!this.isCollapsed());
   }
 
   private setDarkMode(isDark: boolean) {
