@@ -19,7 +19,7 @@ export class Header {
   protected isModalOpen = this.taskService.isModalOpen;
   private router = inject(Router);
   private currentPage = toSignal(
-    this.router.events.pipe(filter((e) => e instanceof NavigationEnd))
+    this.router.events.pipe(filter((e) => e instanceof NavigationEnd)),
   );
 
   title = computed(() => {
@@ -43,6 +43,14 @@ export class Header {
   handleEscapeKey() {
     if (this.isModalOpen()) {
       this.closeModal();
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.ctrlKey && event.shiftKey && event.key === '+') {
+      event.preventDefault(); // Evita atalho do navegador (nova janela anônima)
+      this.openModal();
     }
   }
 }

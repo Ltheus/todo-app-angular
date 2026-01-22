@@ -23,4 +23,8 @@ export class ListItem {
   onDelete() {
     this.taskService.deleteTask(this.task.id);
   }
+
+  onToggle() {
+    this.taskService.toggleCompletion(this.task.id);
+  }
 }
