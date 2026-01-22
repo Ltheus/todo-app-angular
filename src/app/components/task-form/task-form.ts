@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { AfterViewInit, Component, effect, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
 
@@ -9,8 +9,9 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './task-form.html',
   styleUrl: './task-form.css',
 })
-export class TaskForm {
+export class TaskForm implements AfterViewInit {
   private taskService = inject(TaskService);
+  @ViewChild('titleInput') titleInput!: ElementRef<HTMLInputElement>;
 
   taskForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -30,6 +31,10 @@ export class TaskForm {
         this.taskForm.reset();
       }
     });
+  }
+
+  ngAfterViewInit() {
+    this.titleInput.nativeElement.focus();
   }
 
   onSubmit() {
