@@ -1,13 +1,7 @@
-<div class="list-item" [class.completed]="task.completed">
-    <div class="list-item-left">
-        <div class="checkbox-wrapper">
-             <input type="checkbox" [checked]="task.completed" (change)="onToggle()" id="checkbox-{{task.id}}">
-             <label for="checkbox-{{task.id}}"></label>
-        </div>
-        <div class="list-item-content">
-            <h2>{{ task.title }}</h2>
-            <p>{{ task.description }}</p>
-        </div>
+<div class="list-item">
+    <div class="list-item-content">
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.description }}</p>
     </div>
     <div class="list-item-actions">
         <button class="btn-edit" (click)="onEdit()">

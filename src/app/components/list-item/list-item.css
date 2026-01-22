@@ -8,10 +8,7 @@
   border-radius: 12px;
   margin-bottom: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Might want to variable-ize shadow too later */
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.3s ease,
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease,
     border-color 0.3s ease;
   border: 1px solid var(--border-color);
   list-style: none;
@@ -20,58 +17,6 @@
 .list-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.list-item.completed {
-  background-color: var(--completed-bg);
-  border-color: var(--completed-border);
-}
-
-.list-item.completed .list-item-content h2 {
-  text-decoration: line-through;
-  opacity: 0.7;
-}
-
-.list-item-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-/* Custom Checkbox Styling (Basic) */
-.checkbox-wrapper input[type='checkbox'] {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--text-secondary);
-  border-radius: 6px;
-  cursor: pointer;
-  display: grid;
-  place-content: center;
-  transition: all 0.2s;
-}
-
-.checkbox-wrapper input[type='checkbox']::before {
-  content: '';
-  width: 10px;
-  height: 10px;
-  transform: scale(0);
-  transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em var(--btn-primary-text); /* Checkmark color */
-  transform-origin: center;
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-  background-color: white; /* Fallback */
-}
-
-.checkbox-wrapper input[type='checkbox']:checked {
-  background-color: #22c55e; /* Green-500 */
-  border-color: #22c55e;
-}
-
-.checkbox-wrapper input[type='checkbox']:checked::before {
-  transform: scale(1);
-  background-color: white; /* Checkmark is white */
 }
 
 .list-item-content h2 {
