@@ -1,8 +1,50 @@
-<aside>
+<aside [class.collapsed]="isCollapsed()">
+    <div class="sidebar-header">
+        @if (!isCollapsed()) {
+        <h1>To-Do</h1>
+        }
+        <button class="icon-btn" (click)="toggleSidebar()"
+            [attr.aria-label]="isCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'">
+            <lucide-icon [img]="isCollapsed() ? direitinha : esquerdinha" size="20"></lucide-icon>
+        </button>
+    </div>
+
     <nav>
         <ul>
-            <li><a routerLink="/">Pendentes</a></li>
-            <li><a routerLink="/completed">Concluídas</a></li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/" [attr.aria-label]="'Todas'">
+                    <lucide-icon [img]="listinha" size="20"></lucide-icon>
+                    @if (!isCollapsed()) {
+                    <span>Todas</span>
+                    }
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="/pending" [attr.aria-label]="'Pendentes'">
+                    <lucide-icon [img]="reloginho" size="20"></lucide-icon>
+                    @if (!isCollapsed()) {
+                    <span>Pendentes</span>
+                    }
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="/completed" [attr.aria-label]="'Concluídas'">
+                    <lucide-icon [img]="checkinho" size="20"></lucide-icon>
+                    @if (!isCollapsed()) {
+                    <span>Concluídas</span>
+                    }
+                </a>
+            </li>
         </ul>
     </nav>
+
+    <div class="sidebar-footer">
+        <button class="theme-toggle" (click)="toggleTheme()"
+            [attr.aria-label]="isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+            <lucide-icon [img]="isDarkMode() ? solzinho : luazinha" size="20"></lucide-icon>
+            @if (!isCollapsed()) {
+            <span>{{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}</span>
+            }
+        </button>
+    </div>
 </aside>

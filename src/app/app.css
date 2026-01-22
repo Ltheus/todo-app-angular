@@ -10,10 +10,12 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background-color: var(--bg-color); /* Subtle light background to make glassmorphism pop */
+  transition: background-color 0.3s ease;
 }
 
 main {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 40px 20px;
 }

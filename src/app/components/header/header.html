@@ -1,5 +1,16 @@
 <header>
     <nav>
-        <h1>Tarefas</h1>
+        <h1>{{ title() }}</h1>
+        <button class="btn-new-task" (click)="openModal()">
+            <lucide-icon class="icon" [img]="maisinho" size="18"></lucide-icon> Nova Tarefa
+        </button>
     </nav>
+
+    @if (isModalOpen()) {
+    <div class="modal-overlay" (click)="closeModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <app-task-form></app-task-form>
+        </div>
+    </div>
+    }
 </header>
