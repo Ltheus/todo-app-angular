@@ -2,11 +2,15 @@
   background: var(--bg-surface);
   padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); /* Maybe variable-ize shadow later */
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1); /* Maybe variable-ize shadow later */
   width: 100%;
   max-width: 500px;
   border: 1px solid var(--border-color);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .task-form h2 {
@@ -36,7 +40,11 @@
   color: var(--input-text);
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s ease, color 0.3s ease;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background-color 0.3s ease,
+    color 0.3s ease;
   box-sizing: border-box;
 }
 
@@ -95,4 +103,100 @@ button[type='submit']:disabled {
 
 .btn-cancel:hover {
   background-color: var(--btn-cancel-hover);
+}
+
+/* Checkbox & Datepicker Styles */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.checkbox-container .label-text {
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.datepicker-container {
+  margin-top: 8px;
+}
+
+/* Ensure full width for datepicker input inside PrimeNG component if needed, 
+   though PrimeNG structure is complex. Usually targeting class is better. */
+/* DatePicker Styling to match other inputs */
+:host ::ng-deep .p-datepicker {
+  width: 100%;
+}
+
+:host ::ng-deep .p-datepicker-dropdown {
+  background-color: var(--btn-edit-bg) !important;
+  border: 1px solid var(--input-border) !important;
+}
+
+:host ::ng-deep .p-inputtext {
+  width: 100% !important;
+  padding: 10px !important;
+  border: 1px solid var(--input-border) !important;
+  border-right: none !important;
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+  background-color: var(--input-bg) !important;
+  color: var(--input-text) !important;
+  /* border-radius: 8px !important; */
+  font-size: 1rem !important;
+  font-family: inherit !important;
+  box-sizing: border-box !important;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background-color 0.3s ease,
+    color 0.3s ease !important;
+}
+
+:host ::ng-deep .p-inputtext:enabled:focus {
+  outline: none !important;
+  border-color: var(--btn-primary-bg) !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
+}
+
+:host ::ng-deep .p-inputtext:enabled:hover {
+  border-color: var(--btn-primary-bg) !important;
+}
+
+/* Custom Checkbox Styling (Basic) */
+.checkbox-wrapper input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition: all 0.2s;
+  margin: 0; /* Reset checkbox margin */
+}
+
+.checkbox-wrapper input[type='checkbox']::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--btn-primary-text); /* Checkmark color */
+  transform-origin: center;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  background-color: white; /* Fallback */
+}
+
+.checkbox-wrapper input[type='checkbox']:checked {
+  background-color: #22c55e; /* Green-500 */
+  border-color: #22c55e;
+}
+
+.checkbox-wrapper input[type='checkbox']:checked::before {
+  transform: scale(1);
+  background-color: white; /* Checkmark is white */
 }

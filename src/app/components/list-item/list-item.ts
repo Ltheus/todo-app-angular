@@ -1,17 +1,19 @@
 import { Component, inject, Input } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Task, TaskService } from '../../services/task.service';
-import { LucideAngularModule, Pencil, Trash } from 'lucide-angular';
+import { Calendar, LucideAngularModule, Pencil, Trash } from 'lucide-angular';
 
 @Component({
   selector: 'app-list-item',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, DatePipe],
   templateUrl: './list-item.html',
   styleUrl: './list-item.css',
 })
 export class ListItem {
   readonly lapisinho = Pencil;
   readonly lixeirinha = Trash;
+  readonly calendariozinho = Calendar;
   @Input({ required: true }) task!: Task;
 
   private taskService = inject(TaskService);

@@ -1,12 +1,18 @@
 <div class="list-item" [class.completed]="task.completed">
     <div class="list-item-left">
         <div class="checkbox-wrapper">
-             <input type="checkbox" [checked]="task.completed" (change)="onToggle()" id="checkbox-{{task.id}}">
-             <label for="checkbox-{{task.id}}"></label>
+            <input type="checkbox" [checked]="task.completed" (change)="onToggle()" id="checkbox-{{task.id}}">
+            <label for="checkbox-{{task.id}}"></label>
         </div>
         <div class="list-item-content">
             <h2>{{ task.title }}</h2>
             <p>{{ task.description }}</p>
+            @if (task.dueDate) {
+            <div class="task-meta">
+                <span class="task-date"><lucide-icon [img]="calendariozinho" size="18"></lucide-icon> {{ task.dueDate |
+                    date:'dd/MM/yyyy' }}</span>
+            </div>
+            }
         </div>
     </div>
     <div class="list-item-actions">
