@@ -1,0 +1,58 @@
+@if (badgeService.isModalOpen()) {
+<div class="modal-overlay" (click)="close()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>Gerenciar Badges</h2>
+            <button class="close-btn" (click)="close()">&times;</button>
+        </div>
+
+        <div class="modal-content">
+            <!-- Form to add new badge -->
+            <div class="add-badge-form">
+                <div class="input-group">
+                    <input type="text" placeholder="Nome da Badge (ex: Casa)" [(ngModel)]="newBadgeName"
+                        (keyup.enter)="addBadge()" />
+                </div>
+
+                <div class="color-picker-group">
+                    <label>Cor:</label>
+                    <div class="color-options">
+                        @for (color of colors; track color) {
+                        <div class="color-option" [style.background-color]="color"
+                            [class.selected]="newBadgeColor() === color" (click)="newBadgeColor.set(color)"></div>
+                        }
+                        <input type="color" [(ngModel)]="newBadgeColor" class="custom-color-picker" />
+                    </div>
+                </div>
+
+                <button class="btn-add" [disabled]="!newBadgeName().trim()" (click)="addBadge()">
+                    Adicionar Badge
+                </button>
+            </div>
+
+            <hr class="divider" />
+
+            <!-- List of existing badges -->
+            <div class="badges-list">
+                <h3>Minhas Badges</h3>
+                @if (badgeService.badges().length === 0) {
+                <p class="empty-msg">Nenhuma badge criada ainda.</p>
+                } @else {
+                <div class="badges-grid">
+                    @for (badge of badgeService.badges(); track badge.id) {
+                    <div class="badge-item">
+                        <span class="badge-pill" [style.background-color]="badge.color">
+                            {{ badge.name }}
+                        </span>
+                        <button class="btn-delete" (click)="deleteBadge(badge.id)" title="Excluir">
+                            <lucide-icon [name]="lixinho" size="18"></lucide-icon>
+                        </button>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+}

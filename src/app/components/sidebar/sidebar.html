@@ -35,6 +35,14 @@
                     }
                 </a>
             </li>
+            <li>
+                <a (click)="badgeService.openModal()" style="cursor: pointer;" [attr.aria-label]="'Badges'">
+                    <lucide-icon [img]="taguinha" size="20"></lucide-icon>
+                    @if (!isCollapsed()) {
+                    <span>Badges</span>
+                    }
+                </a>
+            </li>
         </ul>
     </nav>
 

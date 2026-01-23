@@ -74,11 +74,16 @@
   background-color: white; /* Checkmark is white */
 }
 
+.list-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .list-item-content h2 {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-color);
-  margin-bottom: 4px;
   margin-top: 0;
 }
 
