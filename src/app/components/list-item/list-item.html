@@ -1,16 +1,30 @@
-<div class="list-item" [class.completed]="task.completed">
+<div class="list-item" [class.late]="isLate()" [class.completed]="task.completed">
     <div class="list-item-left">
         <div class="checkbox-wrapper">
             <input type="checkbox" [checked]="task.completed" (change)="onToggle()" id="checkbox-{{task.id}}">
             <label for="checkbox-{{task.id}}"></label>
         </div>
         <div class="list-item-content">
-            <h2>{{ task.title }}</h2>
+            <h2 class="task-title">{{ task.title }}
+                @if (task.dueDate) {
+                <div class="task-meta">
+                    <span class="task-date"><lucide-icon [img]="calendariozinho" size="18"></lucide-icon> {{
+                        task.dueDate |
+                        date:'dd/MM/yyyy' }}</span>
+                </div>
+                }
+            </h2>
             <p>{{ task.description }}</p>
-            @if (task.dueDate) {
-            <div class="task-meta">
-                <span class="task-date"><lucide-icon [img]="calendariozinho" size="18"></lucide-icon> {{ task.dueDate |
-                    date:'dd/MM/yyyy' }}</span>
+
+            @if (task.badgeIds && task.badgeIds.length > 0) {
+            <div class="task-badges">
+                @for (badgeId of task.badgeIds; track badgeId) {
+                @if (getBadge(badgeId); as badge) {
+                <span class="badge-chip-small" [style.background-color]="badge.color">
+                    {{ badge.name }}
+                </span>
+                }
+                }
             </div>
             }
         </div>

@@ -14,6 +14,10 @@ export class BadgeService {
   badges = signal<Badge[]>([]);
   isModalOpen = signal(false);
 
+  // Filter State
+  filterBadgeIds = signal<string[]>([]);
+  filterNoBadges = signal(false);
+
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.loadFromLocalStorage();
@@ -36,6 +40,21 @@ export class BadgeService {
         { id: crypto.randomUUID(), name: 'Trabalho', color: '#4444ff' },
       ]);
     }
+  }
+
+  // Filter Management
+  toggleFilterBadge(badgeId: string) {
+    this.filterBadgeIds.update((current) => {
+      if (current.includes(badgeId)) {
+        return current.filter((id) => id !== badgeId);
+      } else {
+        return [...current, badgeId];
+      }
+    });
+  }
+
+  toggleFilterNoBadges() {
+    this.filterNoBadges.update((v) => !v);
   }
 
   openModal() {

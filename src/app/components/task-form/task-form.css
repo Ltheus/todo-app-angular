@@ -200,3 +200,115 @@ button[type='submit']:disabled {
   transform: scale(1);
   background-color: white; /* Checkmark is white */
 }
+
+/* Badge Chips Selection */
+.badges-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  position: relative;
+}
+
+.badge-chip {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.badge-chip.selected {
+  color: white;
+  border: none;
+  padding-right: 8px; /* Space for X icon */
+}
+
+.badge-chip.selected:hover {
+  filter: brightness(0.9);
+}
+
+.badge-add-btn {
+  background: transparent;
+  border: 1px dashed var(--border-color); /* Dashed like 'add new' */
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+
+.badge-add-btn:hover,
+.badge-add-btn.active {
+  border-color: var(--btn-primary-bg);
+  color: var(--btn-primary-bg);
+  background: var(--bg-hover);
+}
+
+/* Dropdown */
+.badge-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1001; /* Higher than normal */
+  width: 200px;
+  overflow: hidden;
+  animation: fadeIn 0.1s ease-out;
+}
+
+.badge-dropdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: transparent;
+}
+
+.badge-option {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.badge-option:hover {
+  background: var(--bg-hover, #f3f4f6);
+}
+
+.badge-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.no-badges {
+  padding: 12px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}

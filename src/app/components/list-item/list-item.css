@@ -17,6 +17,12 @@
   list-style: none;
 }
 
+.task-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .list-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -30,6 +36,11 @@
 .list-item.completed .list-item-content h2 {
   text-decoration: line-through;
   opacity: 0.7;
+}
+
+.list-item.late {
+  background-color: var(--late-bg);
+  border-color: var(--late-border);
 }
 
 .list-item-left {
@@ -143,4 +154,21 @@ button {
 
 .btn-delete:hover {
   background-color: var(--btn-delete-hover);
+}
+
+.task-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.badge-chip-small {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: white;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
 }

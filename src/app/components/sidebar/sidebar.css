@@ -11,7 +11,9 @@ aside {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  transition: width 0.3s ease, padding 0.3s ease;
+  transition:
+    width 0.3s ease,
+    padding 0.3s ease;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -139,4 +141,72 @@ aside.collapsed .theme-toggle {
   justify-content: center;
   padding: 12px;
   width: auto;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 16px 0;
+}
+
+.sidebar-filters {
+  flex: 1; /* Take up remaining space if needed */
+  overflow-y: auto;
+}
+
+.sidebar-filters h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  padding-left: 12px;
+  letter-spacing: 0.5px;
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.filter-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.filter-item input[type='checkbox'] {
+  margin-right: 10px;
+  accent-color: var(--btn-primary-bg); /* Use browser native accent for now or custom */
+  cursor: pointer;
+}
+
+.filter-item label {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.collapsed-filters {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  color: var(--text-secondary);
 }

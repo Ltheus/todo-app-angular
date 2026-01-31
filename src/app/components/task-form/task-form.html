@@ -32,6 +32,47 @@
     </div>
 
     <div class="form-group">
+        <label>Badges</label>
+        <div class="badges-selection">
+            <!-- Selected Badges -->
+            @for (badgeId of taskForm.value.badges; track badgeId) {
+            @if (getBadge(badgeId); as badge) {
+            <button type="button" class="badge-chip selected" [style.background-color]="badge.color"
+                [style.border-color]="badge.color" (click)="toggleBadge(badge.id)">
+                {{ badge.name }}
+                <lucide-icon [img]="xiszinho" size="14" style="margin-left: 4px;"></lucide-icon>
+            </button>
+            }
+            }
+
+            <!-- Add Button -->
+            <button type="button" class="badge-add-btn" (click)="toggleSelector()"
+                [class.active]="isBadgeSelectorOpen()">
+                <lucide-icon [img]="maisinho" size="16"></lucide-icon>
+                Adicionar
+            </button>
+
+            <!-- Dropdown Selection -->
+            @if (isBadgeSelectorOpen()) {
+            <div class="badge-dropdown-overlay" (click)="toggleSelector()"></div>
+            <div class="badge-dropdown">
+                @for (badge of badgeService.badges(); track badge.id) {
+                @if (!taskForm.value.badges?.includes(badge.id)) {
+                <button type="button" class="badge-option" (click)="toggleBadge(badge.id)">
+                    <span class="badge-dot" [style.background-color]="badge.color"></span>
+                    {{ badge.name }}
+                </button>
+                }
+                }
+                @if (badgeService.badges().length === taskForm.value.badges?.length) {
+                <div class="no-badges">Todas as badges selecionadas</div>
+                }
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
         <div class="checkbox-container">
             <div class="checkbox-wrapper">
                 <input type="checkbox" formControlName="hasDueDate" id="hasDueDate">

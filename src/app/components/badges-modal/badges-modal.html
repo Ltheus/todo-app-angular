@@ -2,7 +2,7 @@
 <div class="modal-overlay" (click)="close()">
     <div class="modal-container" (click)="$event.stopPropagation()">
         <div class="modal-header">
-            <h2>Gerenciar Badges</h2>
+            <h2>Gerenciar Tags</h2>
             <button class="close-btn" (click)="close()">&times;</button>
         </div>
 
@@ -10,7 +10,7 @@
             <!-- Form to add new badge -->
             <div class="add-badge-form">
                 <div class="input-group">
-                    <input type="text" placeholder="Nome da Badge (ex: Casa)" [(ngModel)]="newBadgeName"
+                    <input type="text" placeholder="Nome da Tag (ex: Casa)" [(ngModel)]="newBadgeName"
                         (keyup.enter)="addBadge()" />
                 </div>
 
@@ -21,12 +21,11 @@
                         <div class="color-option" [style.background-color]="color"
                             [class.selected]="newBadgeColor() === color" (click)="newBadgeColor.set(color)"></div>
                         }
-                        <input type="color" [(ngModel)]="newBadgeColor" class="custom-color-picker" />
                     </div>
                 </div>
 
                 <button class="btn-add" [disabled]="!newBadgeName().trim()" (click)="addBadge()">
-                    Adicionar Badge
+                    Adicionar Tag
                 </button>
             </div>
 
@@ -34,9 +33,9 @@
 
             <!-- List of existing badges -->
             <div class="badges-list">
-                <h3>Minhas Badges</h3>
+                <h3>Minhas Tags</h3>
                 @if (badgeService.badges().length === 0) {
-                <p class="empty-msg">Nenhuma badge criada ainda.</p>
+                <p class="empty-msg">Nenhuma tag criada ainda.</p>
                 } @else {
                 <div class="badges-grid">
                     @for (badge of badgeService.badges(); track badge.id) {

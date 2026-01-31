@@ -36,15 +36,47 @@
                 </a>
             </li>
             <li>
-                <a (click)="badgeService.openModal()" style="cursor: pointer;" [attr.aria-label]="'Badges'">
+                <a (click)="badgeService.openModal()" style="cursor: pointer;" [attr.aria-label]="'Tags'">
                     <lucide-icon [img]="taguinha" size="20"></lucide-icon>
                     @if (!isCollapsed()) {
-                    <span>Badges</span>
+                    <span>Tags</span>
                     }
                 </a>
             </li>
         </ul>
     </nav>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-filters" [class.collapsed]="isCollapsed()">
+        @if (!isCollapsed()) {
+        <h3>Filtrar por Tags</h3>
+        <div class="filter-list">
+            <div class="filter-item">
+                <input type="checkbox" id="no-badge" [checked]="badgeService.filterNoBadges()"
+                    (change)="badgeService.toggleFilterNoBadges()">
+                <label for="no-badge">Sem Etiqueta</label>
+            </div>
+
+            @for (badge of badgeService.badges(); track badge.id) {
+            <div class="filter-item">
+                <input type="checkbox" [id]="'filter-' + badge.id"
+                    [checked]="badgeService.filterBadgeIds().includes(badge.id)"
+                    (change)="badgeService.toggleFilterBadge(badge.id)">
+                <label [for]="'filter-' + badge.id">
+                    <span class="badge-dot" [style.background-color]="badge.color"></span>
+                    {{ badge.name }}
+                </label>
+            </div>
+            }
+        </div>
+        } @else {
+        <!-- Collapsed view icons for filters could go here, or just hide implementation for now -->
+        <div class="collapsed-filters">
+            <lucide-icon [img]="taguinha" size="16" class="filter-icon"></lucide-icon>
+        </div>
+        }
+    </div>
 
     <div class="sidebar-footer">
         <button class="theme-toggle" (click)="toggleTheme()"

@@ -16,15 +16,16 @@ export class BadgesModal {
   badgeService = inject(BadgeService);
 
   newBadgeName = signal('');
-  newBadgeColor = signal('#3b82f6'); // Default blue
+  newBadgeColor = signal('#5085cfff'); // Default blue
 
   colors = [
-    '#3b82f6', // Blue
-    '#ef4444', // Red
-    '#10b981', // green
-    '#f59e0b', // Yellow
-    '#8b5cf6', // Violet
-    '#ec4899', // Pink
+    '#D04848', // Red
+    '#e6a94dff', // Orange
+    'hsla(51, 89%, 65%, 1.00)', // Yellow
+    '#BBCB2E', // Green
+    '#5085cfff', // Blue
+    '#6938dcff', // Purple
+    '#F075AE', // Pink
     '#6b7280', // Gray
   ];
 
