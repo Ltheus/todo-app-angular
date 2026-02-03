@@ -6,6 +6,8 @@ export interface Task {
   title: string;
   description: string;
   completed: boolean;
+  dueDate?: string;
+  badgeIds?: string[];
 }
 
 @Injectable({
@@ -77,21 +79,29 @@ export class TaskService {
   }
 
   // Ações de Tarefa
-  addTask(title: string, description: string) {
+  addTask(title: string, description: string, dueDate?: string, badgeIds: string[] = []) {
     const newTask: Task = {
       id: crypto.randomUUID(), // Gera ID único
       title,
       description,
       completed: false,
+      dueDate,
+      badgeIds,
     };
 
     this.tasks.update((tasks) => [...tasks, newTask]);
     this.closeModal();
   }
 
-  updateTask(id: string, title: string, description: string) {
+  updateTask(
+    id: string,
+    title: string,
+    description: string,
+    dueDate?: string,
+    badgeIds?: string[],
+  ) {
     this.tasks.update((tasks) =>
-      tasks.map((t) => (t.id === id ? { ...t, title, description } : t))
+      tasks.map((t) => (t.id === id ? { ...t, title, description, dueDate, badgeIds } : t)),
     );
     this.closeModal();
   }
@@ -102,7 +112,7 @@ export class TaskService {
 
   toggleCompletion(id: string) {
     this.tasks.update((tasks) =>
-      tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+      tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
     );
   }
 }

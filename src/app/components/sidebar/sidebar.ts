@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, PLATFORM_ID, signal } from '@angular/core';
+import { Component, HostListener, Inject, PLATFORM_ID, signal, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -10,7 +10,9 @@ import {
   List,
   Clock,
   CheckCircle,
+  Tag,
 } from 'lucide-angular';
+import { BadgeService } from '../../services/badge.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -27,6 +29,9 @@ export class Sidebar {
   readonly listinha = List;
   readonly reloginho = Clock;
   readonly checkinho = CheckCircle;
+  readonly taguinha = Tag;
+
+  badgeService = inject(BadgeService);
 
   isDarkMode = signal(false);
   isCollapsed = signal(false);

@@ -45,6 +45,9 @@
 
   --completed-bg: rgba(34, 197, 94, 0.1); /* Soft green */
   --completed-border: rgba(34, 197, 94, 0.2);
+
+  --late-bg: rgba(225, 29, 72, 0.1); /* Soft red */
+  --late-border: rgba(225, 29, 72, 0.2);
 }
 
 html[data-theme='dark'] {
