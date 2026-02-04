@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Task, TaskService } from '../../services/task.service';
 import { BadgeService } from '../../services/badge.service';
@@ -19,6 +19,7 @@ export class ListItem {
 
   private taskService = inject(TaskService);
   private badgeService = inject(BadgeService);
+  private mousePosition = signal({ x: 0, y: 0 });
 
   getBadge(id: string) {
     return this.badgeService.badges().find((b) => b.id === id);
@@ -33,7 +34,7 @@ export class ListItem {
   }
 
   onToggle() {
-    this.taskService.toggleCompletion(this.task.id);
+    this.taskService.toggleCompletion(this.task.id, this.mousePosition());
   }
 
   isLate(): boolean {
@@ -46,5 +47,11 @@ export class ListItem {
     const dueDate = new Date(this.task.dueDate);
     const today = new Date();
     return dueDate < today;
+  }
+
+  onMouseMove(event: MouseEvent) {
+    const x = event.clientX / window.innerWidth;
+    const y = event.clientY / window.innerHeight;
+    this.mousePosition.set({ x, y });
   }
 }

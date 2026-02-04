@@ -33,12 +33,6 @@ export class BadgeService {
     const saved = localStorage.getItem('badges');
     if (saved) {
       this.badges.set(JSON.parse(saved));
-    } else {
-      // Default badges
-      this.badges.set([
-        { id: crypto.randomUUID(), name: 'Casa', color: '#ff4444' },
-        { id: crypto.randomUUID(), name: 'Trabalho', color: '#4444ff' },
-      ]);
     }
   }
 

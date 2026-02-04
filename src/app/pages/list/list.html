@@ -1,9 +1,15 @@
 <div class="list-container">
+    @if (filteredTasks().length > 0) {
     <ul>
         @for (task of filteredTasks(); track task.id) {
         <app-list-item [task]="task"></app-list-item>
-        } @empty {
-        <p class="empty-state">Nenhuma tarefa encontrada.</p>
         }
     </ul>
+    } @else {
+    <div class="empty-state">
+        <lucide-icon size="56" [name]="pergaminho"></lucide-icon>
+        <h3>Nenhuma tarefa encontrada.</h3>
+    </div>
+
+    }
 </div>

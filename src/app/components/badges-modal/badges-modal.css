@@ -17,6 +17,7 @@
   background: var(--bg-surface, #ffffff);
   width: 90%;
   max-width: 500px;
+  max-height: 90%;
   border-radius: 12px;
   box-shadow:
     0 10px 25px -5px rgba(0, 0, 0, 0.1),
@@ -179,6 +180,26 @@
   border-top: 1px solid var(--border-color, #eee);
 }
 
+.badges-list {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 300px;
+  padding-right: 8px;
+}
+
+.badges-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.badges-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.badges-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
 .badges-list h3 {
   font-size: 1rem;
   margin-bottom: 1rem;
@@ -195,7 +216,6 @@
 .badge-item {
   display: flex;
   align-items: center;
-  background: var(--bg-hover, #f3f4f6);
   border-radius: 20px;
   padding-left: 10px;
   border: 1px solid var(--border-color, #e5e7eb);

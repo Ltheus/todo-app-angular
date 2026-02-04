@@ -1,9 +1,29 @@
-<aside [class.collapsed]="isCollapsed()">
+<div class="sidebar-backdrop" [class.show]="!isCollapsed() && isMobile()" (click)="toggleSidebar()"></div>
+
+<button class="icon-btn mobile-toggle" (click)="toggleSidebar()"
+    [attr.aria-label]="isCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'" [class.visible]="isMobile()">
+    <lucide-icon [img]="listinha" size="24"></lucide-icon>
+</button>
+
+<aside [class.collapsed]="isCollapsed()" [class.mobile-open]="!isCollapsed() && isMobile()">
     <div class="sidebar-header">
         @if (!isCollapsed()) {
         <h1>To-Do</h1>
         }
-        <button class="icon-btn" (click)="toggleSidebar()"
+        <!-- Desktop toggle button remains inside or we unify? 
+             If we move it out, desktop view also changes. 
+             Let's keep a toggle button inside for Desktop, and use this new one for Mobile ONLY?
+             Or unify?
+             The user "repurposed" the button. 
+             If I move it out, on desktop it will be fixed at top left 16,16?
+             Desktop sidebar is relative.
+             Let's keep the button inside for desktop, and add a dedicated one for mobile outside?
+             OR, better: logic.
+             If I move it out, I need to handle desktop positioning.
+             
+             Let's try to have a specific mobile toggle button outside.
+        -->
+        <button class="icon-btn desktop-toggle" (click)="toggleSidebar()"
             [attr.aria-label]="isCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'">
             <lucide-icon [img]="isCollapsed() ? direitinha : esquerdinha" size="20"></lucide-icon>
         </button>
