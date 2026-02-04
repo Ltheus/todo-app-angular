@@ -35,10 +35,26 @@ export class Sidebar {
 
   isDarkMode = signal(false);
   isCollapsed = signal(false);
+  isMobile = signal(false);
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkMobile();
+  }
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.initializeTheme();
+      this.checkMobile();
+    }
+  }
+
+  private checkMobile() {
+    this.isMobile.set(window.innerWidth <= 768);
+    if (this.isMobile()) {
+      this.isCollapsed.set(true); // Default to collapsed on mobile
+    } else {
+      this.isCollapsed.set(false); // Default open on desktop
     }
   }
 

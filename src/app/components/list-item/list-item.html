@@ -5,15 +5,17 @@
             <label for="checkbox-{{task.id}}"></label>
         </div>
         <div class="list-item-content">
-            <h2 class="task-title">{{ task.title }}
+            <div class="task-header">
+                <h2 class="task-title">{{ task.title }}</h2>
                 @if (task.dueDate) {
                 <div class="task-meta">
-                    <span class="task-date"><lucide-icon [img]="calendariozinho" size="18"></lucide-icon> {{
-                        task.dueDate |
-                        date:'dd/MM/yyyy' }}</span>
+                    <span class="task-date">
+                        <lucide-icon [img]="calendariozinho" size="18"></lucide-icon> {{ task.dueDate |
+                        date:'dd/MM/yyyy' }}
+                    </span>
                 </div>
                 }
-            </h2>
+            </div>
             <p>{{ task.description }}</p>
 
             @if (task.badgeIds && task.badgeIds.length > 0) {

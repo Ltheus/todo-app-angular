@@ -91,11 +91,95 @@
   gap: 6px;
 }
 
-.list-item-content h2 {
+/* New header container for Title + Date */
+.task-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.task-title {
+  /* Removed internal flex since date is out */
+  margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-color);
-  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .list-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'check title'
+      'date  date'
+      'desc  desc'
+      'badges badges'
+      'action action';
+    padding: 16px;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .list-item-left,
+  .list-item-content,
+  .task-header {
+    display: contents; /* Flatten all connections to make h2 and meta direct grid children */
+  }
+
+  .checkbox-wrapper {
+    grid-area: check;
+    align-self: start;
+    margin-top: 4px;
+  }
+
+  .task-title {
+    grid-area: title;
+    width: 100%;
+    margin: 0;
+  }
+
+  .task-meta {
+    grid-area: date;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .task-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .list-item-content > p {
+    grid-area: desc;
+    width: 100%;
+  }
+
+  .task-badges {
+    grid-area: badges;
+    width: 100%;
+  }
+
+  .list-item-actions {
+    grid-area: action;
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-color);
+    padding-top: 12px;
+    margin-top: 4px;
+    display: flex;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    flex: 1;
+    justify-content: center;
+  }
 }
 
 .list-item-content p {
@@ -171,4 +255,79 @@ button {
   font-weight: 500;
   display: inline-flex;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .list-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'check title'
+      'date date'
+      'desc  desc'
+      'badges badges'
+      'action action';
+    padding: 16px;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .list-item-left {
+    display: contents;
+  }
+
+  .list-item-content {
+    display: contents;
+  }
+
+  .checkbox-wrapper {
+    grid-area: check;
+    /* margin-top managed by grid alignment */
+    align-self: start;
+    margin-top: 4px;
+  }
+
+  .task-title {
+    grid-area: title;
+    width: 100%;
+    margin: 0;
+    align-items: center;
+  }
+
+  .task-meta {
+    grid-area: date;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .task-date {
+    font-size: 0.75rem;
+    flex: 1;
+  }
+
+  .list-item-content > p {
+    grid-area: desc;
+    width: 100%;
+  }
+
+  .task-badges {
+    grid-area: badges;
+    width: 100%;
+  }
+
+  .list-item-actions {
+    grid-area: action;
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-color);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    flex: 1;
+    justify-content: center;
+  }
 }

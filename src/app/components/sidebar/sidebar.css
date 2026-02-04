@@ -210,3 +210,92 @@ aside.collapsed .theme-toggle {
   justify-content: center;
   color: var(--text-secondary);
 }
+
+@media (max-width: 768px) {
+  aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    width: 280px; /* Slightly wider on mobile for better touch targets */
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+  }
+
+  aside.mobile-open {
+    transform: translateX(0);
+  }
+
+  /* When closed on mobile, it's hidden off-screen, not collapsed width */
+  aside.collapsed {
+    width: 280px;
+    padding: 24px 16px;
+  }
+
+  /* Toggle button - fixed on bottom right */
+  .icon-btn.mobile-toggle {
+    display: flex; /* Show on mobile */
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    top: auto;
+    left: auto;
+    z-index: 1100;
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .icon-btn.desktop-toggle {
+    display: none; /* Hide desktop toggle on mobile */
+  }
+
+  aside.mobile-open + .mobile-toggle, /* If it was after, but it's before */
+  .mobile-toggle {
+    /* Ensure it's visible */
+  }
+
+  /* When sidebar is OPEN on mobile, the button might be covered by sidebar if z-index is lower.
+     Sidebar z-index 1000. Button 1100. So button is ON TOP.
+     But we want the button to perhaps "move" or just stay there?
+     If it stays at top-left, and sidebar covers top-left... 
+     The sidebar is standard width 280px.
+     So it covers the button.
+     But button is z-index 1100, so it floats ABOVE the sidebar.
+     That's fine.
+  */
+
+  /* Backdrop */
+  .sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+  }
+
+  .sidebar-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Default state (Desktop) handling for new classes */
+.mobile-toggle {
+  display: none; /* Hidden by default on desktop */
+}
+
+.desktop-toggle {
+  display: flex;
+}

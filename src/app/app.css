@@ -19,3 +19,19 @@ main {
   overflow-y: auto;
   padding: 40px 20px;
 }
+
+@media (max-width: 768px) {
+  :host {
+    position: relative;
+  }
+
+  .container {
+    width: 100%;
+    /* Ensure container doesn't shrink when sidebar is present (since it will be fixed) */
+    flex: none;
+  }
+
+  main {
+    padding: 24px 16px; /* Smaller padding on mobile */
+  }
+}
