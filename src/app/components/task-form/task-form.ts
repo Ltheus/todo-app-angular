@@ -22,6 +22,7 @@ import { BadgeService } from '../../services/badge.service';
 })
 export class TaskForm implements AfterViewInit {
   private taskService = inject(TaskService);
+  editingTask = this.taskService.editingTask;
   badgeService = inject(BadgeService);
   @ViewChild('titleInput') titleInput!: ElementRef<HTMLInputElement>;
 
@@ -97,10 +98,6 @@ export class TaskForm implements AfterViewInit {
     if (this.taskForm.valid) {
       const title = this.taskForm.value.title!;
       const description = this.taskForm.value.description || '';
-      // Se hasDueDate for true, usa o valor de dueDate, senão undefined
-      // PrimeNG DatePicker geralmente retorna Date object, então formatamos para string ou guardamos timestamp se preferir
-      // O input do PrimeNG pode retornar Date. Vamos assumir que queremos string ISO simplificada ou o objeto Date em string.
-      // O endpoint original definia dueDate como string. Vamos converter.
       const rawDate = this.taskForm.value.dueDate;
       let dueDate: string | undefined = undefined;
 

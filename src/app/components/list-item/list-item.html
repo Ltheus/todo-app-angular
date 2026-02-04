@@ -1,4 +1,4 @@
-<div class="list-item" [class.late]="isLate()" [class.completed]="task.completed">
+<div class="list-item" [class.late]="isLate()" [class.completed]="task.completed" (mousemove)="onMouseMove($event)">
     <div class="list-item-left">
         <div class="checkbox-wrapper">
             <input type="checkbox" [checked]="task.completed" (change)="onToggle()" id="checkbox-{{task.id}}">

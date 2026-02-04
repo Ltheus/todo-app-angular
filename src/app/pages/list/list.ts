@@ -4,14 +4,16 @@ import { TaskService } from '../../services/task.service';
 import { BadgeService } from '../../services/badge.service';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { LucideAngularModule, Scroll } from 'lucide-angular';
 
 @Component({
   selector: 'app-list',
-  imports: [ListItem],
+  imports: [ListItem, LucideAngularModule],
   templateUrl: './list.html',
   styleUrl: './list.css',
 })
 export class List {
+  readonly pergaminho = Scroll;
   protected taskService = inject(TaskService);
   protected badgeService = inject(BadgeService);
   private route = inject(ActivatedRoute);

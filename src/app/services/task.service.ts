@@ -1,5 +1,7 @@
 import { effect, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import confetti from 'canvas-confetti';
+import { ConfettiService } from './confetti.service';
 
 export interface Task {
   id: string;
@@ -23,7 +25,10 @@ export class TaskService {
   // Estado da Edição (se null, é uma nova tarefa)
   editingTask = signal<Task | null>(null);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private confettiService: ConfettiService,
+  ) {
     if (isPlatformBrowser(this.platformId)) {
       this.loadFromLocalStorage();
 
@@ -110,9 +115,17 @@ export class TaskService {
     this.tasks.update((tasks) => tasks.filter((t) => t.id !== id));
   }
 
-  toggleCompletion(id: string) {
+  toggleCompletion(id: string, mousePosition: { x: number; y: number }) {
     this.tasks.update((tasks) =>
-      tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
+      tasks.map((t) => {
+        if (t.id === id) {
+          t.completed = !t.completed;
+          if (t.completed) {
+            this.confettiService.show(mousePosition);
+          }
+        }
+        return t;
+      }),
     );
   }
 }
